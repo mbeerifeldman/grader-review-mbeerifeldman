@@ -1,4 +1,4 @@
-CPATH='".:lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar"'
+CPATH=".:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar"
 
 rm -rf student-submission
 rm -rf grading-area
@@ -8,7 +8,6 @@ mkdir grading-area
 git clone $1 student-submission
 echo 'Finished cloning'
 
-
 # Draw a picture/take notes on the directory structure that's set up after
 # getting to this point
 
@@ -16,29 +15,27 @@ echo 'Finished cloning'
 # tests
 
 if [[ -f student-submission/ListExamples.java ]]
-then echo 'Correct file provided'
+then
+  echo 'Correct file provided'
 else
- echo "Haven't provided correct file" 
- exit 0
+  echo "Haven't provided the correct file"
+  exit 0
 fi
 
-cp -r student-submission/* grading-area/ 
+cp -r student-submission/* grading-area/
 cp -r lib/ grading-area/
 cp -r TestListExamples.java grading-area/
 
 cd grading-area
 
-javac -cp ".:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar" *.java 
-java -cp ".:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore TestListExamples >> results.txt
+javac -cp "$CPATH" *.java
+java -cp "$CPATH" org.junit.runner.JUnitCore TestListExamples >> results.txt
 
 if [[ `grep "FAILURES!!!" results.txt` ]]
 then
     echo "Tests did not all pass."
-    //echo `tail -n 3 results.txt`
-    echo results.txt
- 
+    # echo `tail -n 3 results.txt`
+    cat results.txt
 else
     echo "All tests passed! Nice job."
-fi 
-
-
+fi
