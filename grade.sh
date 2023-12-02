@@ -34,8 +34,7 @@ java -cp "$CPATH" org.junit.runner.JUnitCore TestListExamples >> results.txt
 if [[ `grep "FAILURES!!!" results.txt` ]]
 then
     echo "Tests did not all pass."
-    # echo `tail -n 3 results.txt`
-    cat results.txt
+    echo `tail -n 3 results.txt`
 else
     echo "All tests passed! Nice job."
 fi
