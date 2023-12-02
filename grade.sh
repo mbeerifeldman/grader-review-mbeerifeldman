@@ -34,7 +34,9 @@ java -cp ".:lib/junit-4.13.2.jar:lib/hamcrest-core-1.3.jar" org.junit.runner.JUn
 if [[ `grep "FAILURES!!!" results.txt` ]]
 then
     echo "Tests did not all pass."
-    echo `tail -n 3 results.txt`
+    //echo `tail -n 3 results.txt`
+    echo results.txt
+ 
 else
     echo "All tests passed! Nice job."
 fi 
